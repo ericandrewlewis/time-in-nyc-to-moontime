@@ -1,4 +1,4 @@
-import timeInNycToMoontime from './index.js';
+import { timeInNycToMoontime, nextMoonriseInNycTime, nextMoonsetInNycTime } from './index.js';
 import moment from 'moment';
 
 // {
@@ -10,6 +10,36 @@ import moment from 'moment';
 //   }
 // }
 
+// These are all moonrises taken from https://www.timeanddate.com/moon/usa/new-york
+const timesToCheck = [
+  '2024-01-19 11:51-05:00',
+'2024-01-20 12:25-05:00',
+'2024-01-21 13:05-05:00',
+'2024-01-22 13:53-05:00',
+'2024-01-23 14:49-05:00',
+'2024-01-24 15:51-05:00',
+'2024-01-25 16:55-05:00',
+'2024-01-26 18:00-05:00',
+'2024-01-27 19:02-05:00',
+'2024-01-28 20:03-05:00',
+'2024-01-29 21:03-05:00',
+'2024-01-30 22:02-05:00',
+'2024-01-31 23:03-05:00',
+'2024-02-02 00:05-05:00',
+'2024-02-03 01:11-05:00',
+'2024-02-04 02:19-05:00',
+'2024-02-05 03:28-05:00',
+'2024-02-06 04:36-05:00',
+'2024-02-07 05:36-05:00',
+'2024-02-08 06:27-05:00',
+'2024-02-09 07:08-05:00',
+'2024-02-10 07:42-05:00',
+'2024-02-11 08:10-05:00',
+'2024-02-12 08:35-05:00',
+'2024-02-13 09:00-05:00',
+'2024-02-14 09:25-05:00',
+'2024-02-15 09:53-05:00',
+];
 
 // These are all meridians taken from https://www.timeanddate.com/moon/usa/new-york
 // const timesToCheck = [
@@ -192,18 +222,17 @@ import moment from 'moment';
 //   '2027-08-31 12:51:00-05:00',
 // ];
 
-const timesToCheck = [
-  '2024-01-17 10:58:00-05:00',
-  '2024-01-18 00:32:00-05:00',
-];
+// const timesToCheck = [
+//   '2024-01-17 10:58:00-05:00',
+//   '2024-01-18 00:32:00-05:00',
+// ];
 
-for (const timeToCheck of timesToCheck) {
-  const nyctime = moment(timeToCheck);
-  const actual = timeInNycToMoontime(nyctime);
-  console.log(`Time in solar time: ${timeToCheck} converts to moon time ${actual}`);
-}
+// for (const timeToCheck of timesToCheck) {
+//   const nyctime = moment(timeToCheck);
+//   const actual = timeInNycToMoontime(nyctime);
+//   console.log(`Time in solar time: ${timeToCheck} converts to moon time ${actual}`);
+// }
 
-console.log('All tests pass.');
 
 
 // moonrise today was 9:45am
@@ -215,3 +244,51 @@ console.log('All tests pass.');
 
 // we can assume that the moon zenith minus half a moon day is moon midnight
 // so,
+
+
+let dates = [
+  moment('2024-01-24'),
+  moment('2024-01-25'),
+  moment('2024-01-26'),
+  moment('2024-01-27'),
+  moment('2024-01-28'),
+  moment('2024-01-29'),
+  moment('2024-01-30'),
+  moment('2024-01-31'),
+  moment('2024-02-01'),
+  moment('2024-02-02'),
+  moment('2024-02-03'),
+  moment('2024-02-04'),
+  moment('2024-02-05'),
+  moment('2024-02-06'),
+  moment('2024-02-07'),
+  moment('2024-02-08'),
+  moment('2024-02-09'),
+  moment('2024-02-10'),
+  moment('2024-02-11'),
+  moment('2024-02-12'),
+  moment('2024-02-13'),
+  moment('2024-02-14'),
+  moment('2024-02-15'),
+  moment('2024-02-16'),
+  moment('2024-02-17'),
+  moment('2024-02-18'),
+  moment('2024-02-19'),
+  moment('2024-02-20'),
+  moment('2024-02-21'),
+  moment('2024-02-22'),
+  moment('2024-02-23'),
+  moment('2024-02-24'),
+  moment('2024-02-25'),
+  moment('2024-02-26'),
+  moment('2024-02-27'),
+  moment('2024-02-28'),
+];
+for (let d of dates) {
+  const moonrise = timeInNycToMoontime(nextMoonriseInNycTime(d));
+  const moonset = timeInNycToMoontime(nextMoonsetInNycTime(d));
+  console.log(`Moontime moonrise: ${moonrise} moonset: ${moonset} on ${d}`);
+}
+
+
+console.log('All tests pass.');
